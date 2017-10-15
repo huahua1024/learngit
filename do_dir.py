@@ -35,7 +35,7 @@ for f in os.listdir(pwd):
 #print(pyfile)
 
 #在当前目录以及当前目录的所有子目录下查找文件名包含指定字符串的文件，并打印出相对路径。 
-findstr = 'test'
+findstr = 'Stu'
 pwd = os.path.abspath('.') 
 
 for f in os.listdir('.'):
@@ -47,5 +47,19 @@ for f in os.listdir('.'):
         for df in os.listdir(downpath):  
             if findstr in df:
                 print(os.path.join(downpath, df))
-        
-               
+
+def FindFile(p, s):            #定义函数, 传一个path, 一个str
+    for x in os.listdir(p):    #遍历path
+        if os.path.isdir(x):   #x 是目录:
+            newP = os.path.join(p, x)   #新path = p + x
+            print('####' + newP)
+            FindFile(newP, s)           #调用函数自身, 再次遍历这个子目录
+        else:                       #X 是文件:
+            if s in x:             #查找文件名
+                print(os.path.join(p, x))    #打印绝对路径 
+
+print('----===========--------')
+FindFile(pwd, 'test')
+
+print('----===========--------')
+FindFile(pwd, 'do_')
