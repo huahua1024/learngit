@@ -49,14 +49,17 @@ for f in os.listdir('.'):
                 print(os.path.join(downpath, df))
 
 def FindFile(p, s):            #定义函数, 传一个path, 一个str
+    print('enter dir==>' + p)
     for x in os.listdir(p):    #遍历path
-        if os.path.isdir(x):   #x 是目录:
+        if os.path.isdir(os.path.join(p, x)):   #x 是目录。 如果只判断x，会出现误判。要加入整个目录名。
             newP = os.path.join(p, x)   #新path = p + x
             print('####' + newP)
             FindFile(newP, s)           #调用函数自身, 再次遍历这个子目录
         else:                       #X 是文件:
             if s in x:             #查找文件名
                 print(os.path.join(p, x))    #打印绝对路径 
+
+    
 
 print('----===========--------')
 FindFile(pwd, 'test')
